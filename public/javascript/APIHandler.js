@@ -1,25 +1,31 @@
+const axios = require('axios');
+
 class APIHandler {
   constructor (baseUrl) {
-    this.BASE_URL = baseUrl;
+    this.api = axios.create({
+      BASE_URL: baseUrl
+    });
   }
 
   getFullList () {
-
+    this.api.get('/characters');
   }
 
-  getOneRegister () {
-
+  getOneRegister (characterId) {
+    this.api.get(`/characters/${characterId}`)
   }
 
-  createOneRegister () {
-
+  createOneRegister (characterInfo) {
+    this.api.post(`/characters`, characterInfo);
   }
 
-  updateOneRegister () {
-
+  updateOneRegister (characterId, characterInfo) {
+    this.api.put(`/characters/${characterId}`, characterInfo);
   }
 
-  deleteOneRegister () {
-
+  deleteOneRegister (characterId) {
+    this.api.delete(`/characters/${characterId}`);
   }
 }
+
+module.exports = APIHandler
